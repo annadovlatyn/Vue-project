@@ -1,74 +1,70 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-import {ref} from 'vue'
-
-let count = ref(0);
-function plusOne(){
-  count.value++;
-}
-function plusTen(){
-  count.value += 10
-}
-function minusOne(){
-  count.value--
-}
-function minusTen(){
-  count.value -= 10
-}
-function reset(){
-  count.value = 0;
+<script>
+export default {
+  data() {
+    return {
+      email: '',
+      isEmailValid: false,
+    };
+  },
+  methods: {
+    openEmailPrompt() {
+      let email = prompt('Input your email');
+      if (!email) {
+        this.isEmailValid = false;
+        return;
+      }
+      email = email.trim();
+      this.email = email;
+      console.log(email);
+      const isValid = this.checkIsEmailValid(email);
+      this.isEmailValid = isValid;
+    },
+    checkIsEmailValid(email) {
+      const reg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return reg.test(email);
+    },
+    reset() {
+      this.email = '';
+      this.isEmailValid = false;
+    }
+  }
 }
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
 
   <main>
-    <h2> {{count}}</h2>
-    <button @click="plusOne()" class="btn">+1</button>
-    <button @click="plusTen()" class="btn">+10</button>
-    <button @click="minusOne()" class="btn">-1</button>
-    <button @click="minusTen()" class="btn">-10</button>
-    <button @click="reset()" class="btn">Reset</button>
+    <button @click="openEmailPrompt()" class="btn_input">Input your email</button>
+    <button @click="reset()" class="btn-reset">Reset</button>
+    <h1 :class="isEmailValid ? 'green' : 'red'" v-if="email">{{ email }}</h1>
+    <h4 v-if="email" class="info-text">{{ `The email is ${isEmailValid ? 'valid' : 'invalid'}` }}</h4>
   </main>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
+.red{
+  border: 1px solid red;
+  padding: 5px 20px;
+  margin: 10px;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.green{
+  border: 1px solid green;
+  padding: 5px 20px;
+  margin: 10px;
 }
-.btn {
-  width: 70px;
-  margin: 10px 5px;
+.btn_input {
+  padding: 10px 20px;
+  font-size: 20px;
+  margin: 10px;
 }
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.info-text {
+  margin: 10px 15px;
+  font-size: 17px;
+  color: #000;
+}
+.btn-reset {
+  padding: 11px 15px;
+  font-size: 18px;
 }
 </style>
