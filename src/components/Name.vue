@@ -8,6 +8,13 @@ export default {
 </script>
 
 <template>
-    <p>Name - {{ value }}</p>
+    <span class="green">{{ value }}</span>
 
 </template>
+
+<style>
+.green{
+color: green;
+text-transform: capitalize;
+}
+</style>

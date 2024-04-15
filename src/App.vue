@@ -42,7 +42,12 @@ export default {
 
 <template>
   <main>
-  <Product v-for="fruit of fruits" :fruits="fruit"/>
+    <ol>
+      <li v-for="fruit of fruits" :key="fruit.name">
+        <Product  :fruit="fruit"  />
+      </li>
+    </ol>
+  
 </main>
 </template>
 <style>

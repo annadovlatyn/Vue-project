@@ -8,6 +8,6 @@ export default {
 </script>
 
 <template>
-    <p>Description - {{ value }}</p>
+    <span>{{ value }}</span>
 
 </template>

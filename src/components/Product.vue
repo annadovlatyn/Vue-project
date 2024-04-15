@@ -10,7 +10,7 @@ export default {
     Description,
   },
   props:{
-    fruits: Object, 
+    fruit: Object, 
   }
 };
 </script>
@@ -18,9 +18,8 @@ export default {
 
 <template>
 
-<Name :value='fruits.name' />
-<Price :value='fruits.price' />
-<Description :value='fruits.description' />
-<br/><br/>
+  <div>
+    <Name :value='fruit.name' /> <Price :value='fruit.price' /> <Description :value='fruit.description' /> 
+  </div>
 
 </template>
