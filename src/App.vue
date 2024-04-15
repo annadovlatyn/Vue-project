@@ -33,7 +33,20 @@ export default {
           price: '3.7$',
           description: 'Fresh bananas from Ecuador'
         },
-      ]
+      ],
+      rate: 400,
+    }
+  },
+  methods: {
+    onCurrencyChange(index){
+      const fruit = this.fruits[index];
+      let currentCurrency = fruit.price[fruit.price.length - 1];
+      if(currentCurrency === '$'){
+        fruit.price = parseFloat(fruit.price) * this.rate + '֏';
+      }
+      else {
+        fruit.price = parseFloat(fruit.price) / this.rate + '$';
+      }
     }
   }
 };
@@ -43,8 +56,8 @@ export default {
 <template>
   <main>
     <ol>
-      <li v-for="fruit of fruits" :key="fruit.name">
-        <Product  :fruit="fruit"  />
+      <li v-for="(fruit, index) in fruits" :key="fruit.name">
+        <Product  :fruit="fruit"  @currencyChange="onCurrencyChange(index)"/>
       </li>
     </ol>
   
